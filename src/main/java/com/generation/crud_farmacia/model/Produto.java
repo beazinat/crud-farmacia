@@ -2,7 +2,6 @@ package com.generation.crud_farmacia.model;
 
 import java.sql.Date;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import jakarta.persistence.Entity;
@@ -53,6 +52,23 @@ public class Produto {
     @JoinColumn(name = "categoria_id", nullable = false)
     @NotNull(message = "A categoria é obrigatória!")
     private Categoria categoria;
+    
+
+	public Integer getStockQnt() {
+		return stockQnt;
+	}
+
+	public void setStockQnt(Integer stockQnt) {
+		this.stockQnt = stockQnt;
+	}
+
+	public Categoria getCategoria() {
+		return categoria;
+	}
+
+	public void setCategoria(Categoria categoria) {
+		this.categoria = categoria;
+	}
 
 	public Long getId() {
 		return id;
