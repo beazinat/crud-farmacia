@@ -34,6 +34,17 @@ public class Categoria {
 	@JsonIgnoreProperties("categoria")
 	private List <Produto> produto;
 	
+	public Categoria(Long id,
+			String name,
+			String description) {
+		this.id = id;
+		this.name = name;
+		this.description = description;
+	}
+
+	public Categoria() {
+	}
+
 	public Long getId() {
 		return id;
 	}

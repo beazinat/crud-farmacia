@@ -1,7 +1,5 @@
 package com.generation.crud_farmacia.model;
 
-import java.sql.Date;
-
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import jakarta.persistence.Entity;
@@ -44,15 +42,34 @@ public class Produto {
 
     private String imageUrl;
     
-    @NotNull(message = "A validade do produto é obrigatória!")
-    private Date expiration;
-    
     @ManyToOne
     @JsonIgnoreProperties("produto")
-    @JoinColumn(name = "categoria_id", nullable = false)
+    @JoinColumn(name = "categoria_id")
     @NotNull(message = "A categoria é obrigatória!")
     private Categoria categoria;
-    
+
+	public Produto(Long id,
+			String name,
+			String genericName,
+			String description,
+			Double price,
+			String brand,
+			Integer stockQnt, 
+			String imageUrl,
+			Categoria categoria) {
+		this.id = id;
+		this.name = name;
+		this.genericName = genericName;
+		this.description = description;
+		this.price = price;
+		this.brand = brand;
+		this.stockQnt = stockQnt;
+		this.imageUrl = imageUrl;
+		this.categoria = categoria;
+	}
+	
+	public Produto() {
+	}
 
 	public Integer getStockQnt() {
 		return stockQnt;
@@ -132,14 +149,6 @@ public class Produto {
 
 	public void setImageUrl(String imageUrl) {
 		this.imageUrl = imageUrl;
-	}
-
-	public Date getExpiration() {
-		return expiration;
-	}
-
-	public void setExpiration(Date expiration) {
-		this.expiration = expiration;
 	}
 
 	public Categoria getCategory() {
