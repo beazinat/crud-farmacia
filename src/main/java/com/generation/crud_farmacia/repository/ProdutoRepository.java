@@ -11,8 +11,8 @@ import com.generation.crud_farmacia.model.Produto;
 @Repository
 public interface ProdutoRepository extends JpaRepository<Produto, Long>{
 	
-	public List<Produto> getAllByNameContainingIgnoreCase(@Param("name") String name);
+	public List<Produto> getAllByNomeContainingIgnoreCase(@Param("nome") String nome);
 	
-	public List<Produto> getAllByBrandContainingIgnoreCase(@Param("brand") String brand);
+	public List<Produto> getAllByMarcaContainingIgnoreCase(@Param("marca") String marca);
 
 }

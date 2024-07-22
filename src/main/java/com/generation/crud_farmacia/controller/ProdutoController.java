@@ -41,34 +41,40 @@ public class ProdutoController {
 	@GetMapping("/{id}")
 	public ResponseEntity<Produto> getById (@PathVariable Long id){
 		return produtoRepository.findById(id)
-				.map(response -> ResponseEntity.ok(response))
+				.map(resposta -> ResponseEntity.ok(resposta))
 				.orElse(ResponseEntity.notFound().build());
 	}
 	
-	@GetMapping("/nome/{name}")
-	public ResponseEntity<List<Produto>> getByName(@PathVariable String name) {
-		return ResponseEntity.ok(produtoRepository.getAllByNameContainingIgnoreCase(name));
+	@GetMapping("/nome/{nome}")
+	public ResponseEntity<List<Produto>> getByNome(@PathVariable String nome) {
+		return ResponseEntity.ok(produtoRepository.getAllByNomeContainingIgnoreCase(nome));
 	}
 	
-	@GetMapping("/marca/{brand}")
-	public ResponseEntity<List<Produto>> getByBrand(@PathVariable String brand) {
-		return ResponseEntity.ok(produtoRepository.getAllByBrandContainingIgnoreCase(brand));
+	@GetMapping("/marca/{marca}")
+	public ResponseEntity<List<Produto>> getByMarca(@PathVariable String marca) {
+		return ResponseEntity.ok(produtoRepository.getAllByMarcaContainingIgnoreCase(marca));
 	}
 	
 	@PostMapping
-	public ResponseEntity<Produto> post(@Valid @RequestBody Produto product) {
-		if(categoriaRepository.existsById(product.getCategory().getId()))
-			return ResponseEntity.status(HttpStatus.CREATED)
-					.body(produtoRepository.save(product));
-		throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Categoria inexistente.", null);
+	public ResponseEntity<Produto> post(@Valid @RequestBody Produto produto) {
+	    if(categoriaRepository.existsById(produto.getCategoria().getId())) {
+	        return ResponseEntity.status(HttpStatus.CREATED)
+	                .body(produtoRepository.save(produto));
+	    }
+	    throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Categoria inexistente.", null);
 	}
-	
+
 	@PutMapping
 	public ResponseEntity<Produto> put(@Valid @RequestBody Produto produto) {
-		if(categoriaRepository.existsById(produto.getCategory().getId()))
-			return ResponseEntity.status(HttpStatus.CREATED)
-					.body(produtoRepository.save(produto));
-		throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Categoria inexistente.", null);
+	    if(produtoRepository.existsById(produto.getId())) {
+	        if(categoriaRepository.existsById(produto.getCategoria().getId())) {
+	            return ResponseEntity.status(HttpStatus.OK)
+	                    .body(produtoRepository.save(produto));
+	        } else {
+	            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Categoria inexistente.", null);
+	        }
+	    }
+	    throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Produto não encontrado.", null);
 	}
 	
 	@ResponseStatus(HttpStatus.NO_CONTENT)

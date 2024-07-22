@@ -25,21 +25,21 @@ public class Categoria {
 	
 	@NotBlank(message = "O nome é obrigatório!")
 	@Size(min = 3, max = 255, message = "O nome deve conter no mínimo 03 e no máximo 255 caracteres")
-	private String name;
+	private String nome;
 	
 	@Size(max = 500, message = "A descrição deve conter no máximo 500 caracteres")
-	private String description;
+	private String descricao;
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "categoria", cascade = CascadeType.REMOVE)
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "categoria", cascade = CascadeType.REMOVE)
 	@JsonIgnoreProperties("categoria")
 	private List <Produto> produto;
 	
 	public Categoria(Long id,
-			String name,
-			String description) {
+			String nome,
+			String descricao) {
 		this.id = id;
-		this.name = name;
-		this.description = description;
+		this.nome = nome;
+		this.descricao = descricao;
 	}
 
 	public Categoria() {
@@ -53,20 +53,20 @@ public class Categoria {
 		this.id = id;
 	}
 
-	public String getName() {
-		return name;
+	public String getNome() {
+		return nome;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setNome(String nome) {
+		this.nome = nome;
 	}
 
-	public String getDescription() {
-		return description;
+	public String getDescricao() {
+		return descricao;
 	}
 
-	public void setDescription(String description) {
-		this.description = description;
+	public void setDescricao(String descricao) {
+		this.descricao = descricao;
 	}
 
 	public List<Produto> getProduto() {

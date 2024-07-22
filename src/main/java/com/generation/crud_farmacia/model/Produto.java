@@ -6,7 +6,6 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
@@ -16,75 +15,50 @@ import jakarta.validation.constraints.Size;
 @Entity
 @Table(name = "tb_produtos")
 public class Produto {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	
+
 	@NotBlank(message = "O nome é obrigatório!")
 	@Size(min = 3, max = 255, message = "O nome deve conter no mínimo 03 e no máximo 255 caracteres")
-	private String name;
-	
-	private String genericName;
-	
+	private String nome;
+
+	private String nomeGenerico;
+
 	@NotBlank(message = "A descrição é obrigatória!")
-    @Size(min = 10, message = "A descrição deve conter no mínimo 10 caracteres")
-    private String description;
-    
-    @NotNull(message = "O preço é obrigatório!")
-    private Double price;
-    
-    @NotNull(message = "A marca é obrigatória!")
-    private String brand;
-    
-    @NotNull(message = "A quantidade em estoque é obrigatória!")
-    private Integer stockQnt;
+	@Size(min = 10, message = "A descrição deve conter no mínimo 10 caracteres")
+	private String descricao;
 
-    private String imageUrl;
-    
-    @ManyToOne
-    @JsonIgnoreProperties("produto")
-    @JoinColumn(name = "categoria_id")
-    @NotNull(message = "A categoria é obrigatória!")
-    private Categoria categoria;
+	@NotNull(message = "O preço é obrigatório!")
+	private Double preco;
 
-	public Produto(Long id,
-			String name,
-			String genericName,
-			String description,
-			Double price,
-			String brand,
-			Integer stockQnt, 
-			String imageUrl,
-			Categoria categoria) {
+	@NotNull(message = "A marca é obrigatória!")
+	private String marca;
+
+	@NotNull(message = "A quantidade em estoque é obrigatória!")
+	private Integer qntEstoque;
+
+	private String imagemUrl;
+
+	@ManyToOne
+	@JsonIgnoreProperties("produto")
+	private Categoria categoria;
+
+	public Produto(Long id, String nome, String nomeGenerico, String descricao, Double preco, String marca,
+			Integer qntEstoque, String imagemUrl, Categoria categoria) {
 		this.id = id;
-		this.name = name;
-		this.genericName = genericName;
-		this.description = description;
-		this.price = price;
-		this.brand = brand;
-		this.stockQnt = stockQnt;
-		this.imageUrl = imageUrl;
+		this.nome = nome;
+		this.nomeGenerico = nomeGenerico;
+		this.descricao = descricao;
+		this.preco = preco;
+		this.marca = marca;
+		this.qntEstoque = qntEstoque;
+		this.imagemUrl = imagemUrl;
 		this.categoria = categoria;
 	}
-	
+
 	public Produto() {
-	}
-
-	public Integer getStockQnt() {
-		return stockQnt;
-	}
-
-	public void setStockQnt(Integer stockQnt) {
-		this.stockQnt = stockQnt;
-	}
-
-	public Categoria getCategoria() {
-		return categoria;
-	}
-
-	public void setCategoria(Categoria categoria) {
-		this.categoria = categoria;
 	}
 
 	public Long getId() {
@@ -95,68 +69,68 @@ public class Produto {
 		this.id = id;
 	}
 
-	public String getName() {
-		return name;
+	public String getNome() {
+		return nome;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setNome(String nome) {
+		this.nome = nome;
 	}
 
-	public String getGenericName() {
-		return genericName;
+	public String getNomeGenerico() {
+		return nomeGenerico;
 	}
 
-	public void setGenericName(String genericName) {
-		this.genericName = genericName;
+	public void setNomeGenerico(String nomeGenerico) {
+		this.nomeGenerico = nomeGenerico;
 	}
 
-	public String getDescription() {
-		return description;
+	public String getDescricao() {
+		return descricao;
 	}
 
-	public void setDescription(String description) {
-		this.description = description;
+	public void setDescricao(String descricao) {
+		this.descricao = descricao;
 	}
 
-	public Double getPrice() {
-		return price;
+	public Double getPreco() {
+		return preco;
 	}
 
-	public void setPrice(Double price) {
-		this.price = price;
+	public void setPreco(Double preco) {
+		this.preco = preco;
 	}
 
-	public String getBrand() {
-		return brand;
+	public String getMarca() {
+		return marca;
 	}
 
-	public void setBrand(String brand) {
-		this.brand = brand;
+	public void setMarca(String marca) {
+		this.marca = marca;
 	}
 
-	public Integer getStockQuantity() {
-		return stockQnt;
+	public Integer getQntEstoque() {
+		return qntEstoque;
 	}
 
-	public void setStockQuantity(Integer stockQuantity) {
-		this.stockQnt = stockQuantity;
+	public void setQntEstoque(Integer qntEstoque) {
+		this.qntEstoque = qntEstoque;
 	}
 
-	public String getImageUrl() {
-		return imageUrl;
+	public String getImagemUrl() {
+		return imagemUrl;
 	}
 
-	public void setImageUrl(String imageUrl) {
-		this.imageUrl = imageUrl;
+	public void setImagemUrl(String imagemUrl) {
+		this.imagemUrl = imagemUrl;
 	}
 
-	public Categoria getCategory() {
+	public Categoria getCategoria() {
 		return categoria;
 	}
 
-	public void setCategory(Categoria category) {
-		this.categoria = category;
+	public void setCategoria(Categoria categoria) {
+		this.categoria = categoria;
 	}
 
 }
